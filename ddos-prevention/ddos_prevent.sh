@@ -7,7 +7,7 @@ while :;do
 	sleep 180
 	max=$(sed -n '$=' /var/log/httpd/access_log)
 	time_sum=$[$max-$min]
-	for i in `seq $(tail -time_sum /var/log/httpd/access_log|awk '{print $1}'|sort|uniq|wc -l)`;do
+	for i in `seq $(tail -$time_sum /var/log/httpd/access_log|awk '{print $1}'|sort|uniq|wc -l)`;do
 		ip_sum=$(tail -$time_sum /var/log/httpd/access_log|awk '{print $1}'|sort|uniq -c|awk NR==$i'{print $1}')
 		ip=$(tail -$time_sum /var/log/httpd/access_log|awk '{print $1}'|sort|uniq -c|awk NR==$i'{print $2}')
 		if [ $ip_sum -ge 100 ];then
